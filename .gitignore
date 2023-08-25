@@ -1,0 +1,13 @@
+# Archivos y carpetas específicos de entornos virtuales
+venv/
+env/
+*.pyc
+__pycache__/
+
+# Archivo de registro de cambios
+changelog.txt
+
+# Otros archivos generados automáticamente
+*.log
+*.swp
+*.swo
