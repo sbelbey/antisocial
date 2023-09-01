@@ -11,3 +11,7 @@ changelog.txt
 *.log
 *.swp
 *.swo
+
+
+#VSCode config
+.vscode/
