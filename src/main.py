@@ -1,6 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from datetime import datetime
+from config.BDConnection import connect
+from functions.post_functions import crear_post
+from functions.user_functions import obtener_datos_usuario
+
+userId = 1
+
+datos_usuario = obtener_datos_usuario(userId)
 
 # Variables de colores
 color_principal = "#7371FC"
@@ -8,18 +15,6 @@ color_fondo = "#F2F5FF"
 color_texto = "#14080E"
 color_texto_secundario = "#34344A"
 color_resaltado = "#DB5461"
-
-# Función para publicar un post
-
-
-def publicar_post():
-    contenido = entry_post.get()
-    if contenido:
-        tiempo_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        texto_post = f"[{tiempo_actual}] {contenido}\n"
-        texto_posteo.insert(tk.END, texto_post)
-        entry_post.delete(0, tk.END)
-
 
 # Configuración de la ventana principal
 root = tk.Tk()
@@ -36,15 +31,15 @@ titulo.pack(pady=20)
 # Avatar del usuario
 avatar = tk.PhotoImage(file="public/avatar.png")
 avatar_label = tk.Label(root, image=avatar, bg=color_principal)
-avatar_label.pack(anchor=NW)
+avatar_label.pack()
 
 # Nombre del usuario
-nombre_usuario = tk.Label(root, text="Nombre de Usuario", font=(
+nombre_usuario = tk.Label(root, text=datos_usuario[0], font=(
     "Helvetica", 16), bg=color_principal, fg=color_texto)
 nombre_usuario.pack()
 
 # Nombre y Apellido
-nombre_apellido = tk.Label(root, text="Nombre Apellido", font=(
+nombre_apellido = tk.Label(root, text=f"{datos_usuario[1]} {datos_usuario[2]}", font=(
     "Helvetica", 14), bg=color_principal, fg=color_texto_secundario)
 nombre_apellido.pack()
 
@@ -53,7 +48,8 @@ entry_post = ttk.Entry(root, width=40)
 entry_post.pack(pady=10)
 
 # Botón para publicar un post
-btn_publicar = ttk.Button(root, text="Publicar", command=publicar_post)
+btn_publicar = ttk.Button(root, text="Publicar", command=lambda: crear_post(
+    entry_post, texto_posteo, 1))  # Pasa el ID del usuario aquí
 btn_publicar.pack()
 
 # Área de visualización de los posteos
