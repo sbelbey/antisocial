@@ -1,4 +1,4 @@
-# antisocial
+# BitSocial
 
 Antes de desarrollar, leer esto:
 
