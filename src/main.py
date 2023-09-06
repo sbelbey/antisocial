@@ -3,6 +3,7 @@ from tkinter import ttk
 from datetime import datetime
 from config.BDConnection import connect
 from functions.post_functions import crear_post
+from functions.post_functions import cargar_posteos
 from functions.user_functions import obtener_datos_usuario
 
 userId = 1
@@ -49,7 +50,7 @@ entry_post.pack(pady=10)
 
 # Botón para publicar un post
 btn_publicar = ttk.Button(root, text="Publicar", command=lambda: crear_post(
-    entry_post, texto_posteo, 1))  # Pasa el ID del usuario aquí
+    entry_post, texto_posteo, userId))  # Pasa el ID del usuario aquí
 btn_publicar.pack()
 
 # Área de visualización de los posteos
@@ -62,5 +63,6 @@ scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=texto_posteo.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 texto_posteo.config(yscrollcommand=scrollbar.set)
 
+cargar_posteos(texto_posteo, userId)
 # Iniciar la aplicación
 root.mainloop()
